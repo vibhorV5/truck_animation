@@ -27,8 +27,8 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen>
 
   @override
   void dispose() {
-    _controller.dispose();
     super.dispose();
+    _controller.dispose();
   }
 
   bool start = true;

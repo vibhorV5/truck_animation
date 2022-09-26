@@ -17,18 +17,20 @@ class _LineState extends State<Line> with SingleTickerProviderStateMixin {
   double _fraction = 0.0;
   late Animation<double> animation;
 
+  late final AnimationController _controller = AnimationController(
+      duration: const Duration(milliseconds: 2300), vsync: this);
+
   @override
   void initState() {
     super.initState();
-    var controller = AnimationController(
-        duration: const Duration(milliseconds: 2300), vsync: this);
-    animation = Tween(begin: 0.0, end: 0.4).animate(controller)
+
+    animation = Tween(begin: 0.0, end: 0.4).animate(_controller)
       ..addListener(() {
         setState(() {
           _fraction = animation.value;
         });
       });
-    controller.forward();
+    _controller.forward();
 
     // _animation.addListener(() {
     //   setState(() {
@@ -36,6 +38,12 @@ class _LineState extends State<Line> with SingleTickerProviderStateMixin {
     //   });
     // });
     // _controller.forward();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
   }
 
   @override
